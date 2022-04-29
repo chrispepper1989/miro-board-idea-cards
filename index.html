@@ -61,8 +61,24 @@
     {
         // Find all widgets with tag 'Red tag'
         let tags = await miro.board.tags.get({title: 'Quote Tag'})
+        
         console.log(tags[0].widgetIds)
         const array = tags[0].widgetIds;
+
+        if(array.length <= 1)
+        {       
+           array = await miro.board.selection.get()
+        }
+        if(array.length <= 1)
+        {            
+            array = await miro.board.widgets.get({type: 'card'});
+        }
+        if(array.length <= 1)
+        {            
+            array = await miro.board.widgets.get({type: 'sticker'});
+        }
+
+        
         //put all in a deck
         miro.board.widgets.sendBackward(array);
         miro.board.widgets.transformDelta(   array, -10,-10);  
@@ -344,7 +360,7 @@
 
         )
         //add card tag
-        miro.board.tags.update({title: 'Quote Tag', color: '#F24726', widgetIds: widgets})
+        miro.board.tags.create({title: 'Quote Tag', color: '#00FF00', widgetIds: widgets})
 
     }
 
