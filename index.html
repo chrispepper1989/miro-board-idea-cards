@@ -6,21 +6,21 @@
     miro.onReady(() => {
      
 
-      miro.initialize({
-        extensionPoints: {
-          bottomBar: {
-            title: 'Say Hello',
-            svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
-            onClick: () => {
-              alert('Hi Chris!')
-          
-            }},
+
+
+    miro.initialize({
+        extensionPoints: {         
             bottomBar: { title: 'Generate Cards',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
-            onClick: () => {
-                generateCards();
-          
-            }},
+            onClick: () => {              
+              generateCards();
+            }
+          }
+        }
+      })
+
+      miro.initialize({
+        extensionPoints: {         
             bottomBar: { title: 'Get Random Card With Card Tag',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {              
@@ -29,6 +29,9 @@
           }
         }
       })
+
+      
+
 
       createExampleCard();
 
@@ -327,4 +330,7 @@
 
     </script>
 </head>
+<body>
+
+</body>
 </html>
