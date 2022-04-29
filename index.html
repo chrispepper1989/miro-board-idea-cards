@@ -14,32 +14,318 @@
             onClick: () => {
               alert('Hi Chris!')
           
+            },//
+            title: 'Generate Cards',
+            svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
+            onClick: () => {
+                generateCards();
+          
             },
-            title: 'Create Widgets',
+            title: 'Get Random Card With Card Tag',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {              
-              createWidgets();
+              getRandomCard();
             }
           }
         }
       })
 
-      createWidgets();
+      createExampleCard();
 
     })
-    async function createWidgets()
-    {
-        // Create sticker and card with tag 'Red tag' 
-        let widgets = await miro.board.widgets.create([
-            {type: 'sticker', text: 'I am sticker'},
-            {type: 'card', title: 'I am card'},
-        ])
-        miro.board.tags.create({title: 'Red tag', color: '#F24726', widgetIds: widgets})
 
+    async function getRandomCard()
+    {
         // Find all widgets with tag 'Red tag'
-        let tags = await miro.board.tags.get({title: 'Red tag'})
+        let tags = await miro.board.tags.get({title: 'Card Tag'})
         console.log(tags[0].widgetIds)
+        const array = tags[0].widgetIds;
+        //put all in a deck
+        miro.board.widgets.sendBackward(array);
+        miro.board.widgets.transformDelta(   array, -10,-10);  
+        
+        //pick one        
+        const chosenId = array[Math.floor(Math.random() * array.length)];
+        
+        miro.board.widgets.bringForward(chosenId)   
+        miro.board.widgets.transformDelta(   chosenId, 10,10);  
+        await miro.board.viewport.zoomToObject(chosenId)
     }
+    async function createExampleCard()
+    {
+        // Create card with tag 'Red tag' 
+        let widgets = await miro.board.widgets.create([           
+            {type: 'card', title: 'I am test card'},
+        ])
+        miro.board.tags.create({title: 'Card Tag', color: '#F24726', widgetIds: widgets})
+
+        
+    }
+    async function generateCards()
+    {
+        const allCardText = [
+"Abandon normal instruments",
+"Accept advice",
+"Accretion",
+"A line has two sides",
+"Allow an easement (an easement is the abandonment of a stricture)",
+"Are there sections? Consider transitions",
+"Ask people to work against their better judgement",
+"Ask your body",
+"Assemble some of the instruments in a group and treat the group",
+"Balance the consistency principle with the inconsistency principle",
+"Be dirty",
+"Breathe more deeply",
+"Bridges -build -burn",
+"Cascades",
+"Change instrument roles",
+"Change nothing and continue with immaculate consistency",
+"Children's voices -speaking -singing",
+"Cluster analysis",
+"Consider different fading systems",
+"Consult other sources -promising -unpromising",
+"Convert a melodic element into a rhythmic element",
+"Courage!",
+"Cut a vital connection",
+"Decorate",
+" decorate",
+"Define an area as `safe' and use it as an anchor",
+"Destroy -nothing -the most important thing",
+"Discard an axiom",
+"Disconnect from desire",
+"Discover the recipes you are using and abandon them",
+"Distorting time",
+"Do nothing for as long as possible",
+"Don't be afraid of things because they're easy to do",
+"Don't be frightened of cliches",
+"Don't be frightened to display your talents",
+"Don't break the silence",
+"Don't stress one thing more than another",
+"Do something boring",
+"Do the washing up",
+"Do the words need changing?",
+"Do we need holes?",
+"Emphasize differences",
+"Emphasize repetitions",
+"Emphasize the flaws",
+"Faced with a choice",
+" do both (given by Dieter Roth)",
+"Feedback recordings into an acoustic situation",
+"Fill every beat with something",
+"Get your neck massaged",
+"Ghost echoes",
+"Give the game away",
+"Give way to your worst impulse",
+"Go slowly all the way round the outside",
+"Honor thy error as a hidden intention",
+"How would you have done it?",
+"Humanize something free of error",
+"Imagine the music as a moving chain or caterpillar",
+"Imagine the music as a set of disconnected events",
+"Infinitesimal gradations",
+"Intentions -credibility of -nobility of -humility of",
+"Into the impossible",
+"Is it finished?",
+"Is there something missing?",
+"Is the tuning appropriate?",
+"Just carry on",
+"Left channel",
+" right channel",
+" centre channel",
+"Listen in total darkness",
+" or in a very large room",
+" very quietly",
+"Listen to the quiet voice",
+"Look at a very small object",
+" look at its centre",
+"Look at the order in which you do things",
+"Look closely at the most embarrassing details and amplify them",
+"Lowest common denominator check -single beat -single note -single",
+"riff",
+"Make a blank valuable by putting it in an exquisite frame",
+"Make an exhaustive list of everything you might do and do the last",
+"thing on the list",
+"Make a sudden",
+" destructive unpredictable action; incorporate",
+"Mechanicalize something idiosyncratic",
+"Mute and continue",
+"Only one element of each kind",
+"(Organic) machinery",
+"Overtly resist change",
+"Put in earplugs",
+"Remember those quiet evenings",
+"Remove ambiguities and convert to specifics",
+"Remove specifics and convert to ambiguities",
+"Repetition is a form of change",
+"Reverse",
+"Short circuit (example: a man eating peas with the idea that they will",
+"improve his virility shovels them straight into his lap)",
+"Shut the door and listen from outside",
+"Simple subtraction",
+"Spectrum analysis",
+"Take a break",
+"Take away the elements in order of apparent non-importance",
+"Tape your mouth (given by Ritva Saarikko)",
+"The inconsistency principle",
+"The tape is now the music",
+"Think of the radio",
+"Tidy up",
+"Trust in the you of now",
+"Turn it upside down",
+"Twist the spine",
+"Use an old idea",
+"Use an unacceptable color",
+"Use fewer notes",
+"Use filters",
+"Use 'unqualified' people",
+"Water",
+"What are you really thinking about just now? Incorporate",
+"What is the reality of the situation?",
+"What mistakes did you make last time?",
+"What would your closest friend do?",
+"What wouldn't you do?",
+"Work at a different speed",
+"You are an engineer",
+"You can only make one dot at a time",
+"You don't have to be ashamed of using your own ideas",
+];
+
+
+        // Create cards:
+        let widgets = await miro.board.widgets.create(
+            [
+{type: 'card', title: "Abandon normal instruments"},
+{type: 'card', title: "Accept advice"},
+{type: 'card', title: "Accretion"},
+{type: 'card', title: "A line has two sides"},
+{type: 'card', title: "Allow an easement (an easement is the abandonment of a stricture)"},
+{type: 'card', title: "Are there sections? Consider transitions"},
+{type: 'card', title: "Ask people to work against their better judgement"},
+{type: 'card', title: "Ask your body"},
+{type: 'card', title: "Assemble some of the instruments in a group and treat the group"},
+{type: 'card', title: "Balance the consistency principle with the inconsistency principle"},
+{type: 'card', title: "Be dirty"},
+{type: 'card', title: "Breathe more deeply"},
+{type: 'card', title: "Bridges -build -burn"},
+{type: 'card', title: "Cascades"},
+{type: 'card', title: "Change instrument roles"},
+{type: 'card', title: "Change nothing and continue with immaculate consistency"},
+{type: 'card', title: "Children's voices -speaking -singing"},
+{type: 'card', title: "Cluster analysis"},
+{type: 'card', title: "Consider different fading systems"},
+{type: 'card', title: "Consult other sources -promising -unpromising"},
+{type: 'card', title: "Convert a melodic element into a rhythmic element"},
+{type: 'card', title: "Courage!"},
+{type: 'card', title: "Cut a vital connection"},
+{type: 'card', title: "Decorate"},
+{type: 'card', title: " decorate"},
+{type: 'card', title: "Define an area as `safe' and use it as an anchor"},
+{type: 'card', title: "Destroy -nothing -the most important thing"},
+{type: 'card', title: "Discard an axiom"},
+{type: 'card', title: "Disconnect from desire"},
+{type: 'card', title: "Discover the recipes you are using and abandon them"},
+{type: 'card', title: "Distorting time"},
+{type: 'card', title: "Do nothing for as long as possible"},
+{type: 'card', title: "Don't be afraid of things because they're easy to do"},
+{type: 'card', title: "Don't be frightened of cliches"},
+{type: 'card', title: "Don't be frightened to display your talents"},
+{type: 'card', title: "Don't break the silence"},
+{type: 'card', title: "Don't stress one thing more than another"},
+{type: 'card', title: "Do something boring"},
+{type: 'card', title: "Do the washing up"},
+{type: 'card', title: "Do the words need changing?"},
+{type: 'card', title: "Do we need holes?"},
+{type: 'card', title: "Emphasize differences"},
+{type: 'card', title: "Emphasize repetitions"},
+{type: 'card', title: "Emphasize the flaws"},
+{type: 'card', title: "Faced with a choice"},
+{type: 'card', title: " do both (given by Dieter Roth)"},
+{type: 'card', title: "Feedback recordings into an acoustic situation"},
+{type: 'card', title: "Fill every beat with something"},
+{type: 'card', title: "Get your neck massaged"},
+{type: 'card', title: "Ghost echoes"},
+{type: 'card', title: "Give the game away"},
+{type: 'card', title: "Give way to your worst impulse"},
+{type: 'card', title: "Go slowly all the way round the outside"},
+{type: 'card', title: "Honor thy error as a hidden intention"},
+{type: 'card', title: "How would you have done it?"},
+{type: 'card', title: "Humanize something free of error"},
+{type: 'card', title: "Imagine the music as a moving chain or caterpillar"},
+{type: 'card', title: "Imagine the music as a set of disconnected events"},
+{type: 'card', title: "Infinitesimal gradations"},
+{type: 'card', title: "Intentions -credibility of -nobility of -humility of"},
+{type: 'card', title: "Into the impossible"},
+{type: 'card', title: "Is it finished?"},
+{type: 'card', title: "Is there something missing?"},
+{type: 'card', title: "Is the tuning appropriate?"},
+{type: 'card', title: "Just carry on"},
+{type: 'card', title: "Left channel"},
+{type: 'card', title: " right channel"},
+{type: 'card', title: " centre channel"},
+{type: 'card', title: "Listen in total darkness"},
+{type: 'card', title: " or in a very large room"},
+{type: 'card', title: " very quietly"},
+{type: 'card', title: "Listen to the quiet voice"},
+{type: 'card', title: "Look at a very small object"},
+{type: 'card', title: " look at its centre"},
+{type: 'card', title: "Look at the order in which you do things"},
+{type: 'card', title: "Look closely at the most embarrassing details and amplify them"},
+{type: 'card', title: "Lowest common denominator check -single beat -single note -single"},
+{type: 'card', title: "riff"},
+{type: 'card', title: "Make a blank valuable by putting it in an exquisite frame"},
+{type: 'card', title: "Make an exhaustive list of everything you might do and do the last"},
+{type: 'card', title: "thing on the list"},
+{type: 'card', title: "Make a sudden"},
+{type: 'card', title: " destructive unpredictable action; incorporate"},
+{type: 'card', title: "Mechanicalize something idiosyncratic"},
+{type: 'card', title: "Mute and continue"},
+{type: 'card', title: "Only one element of each kind"},
+{type: 'card', title: "(Organic) machinery"},
+{type: 'card', title: "Overtly resist change"},
+{type: 'card', title: "Put in earplugs"},
+{type: 'card', title: "Remember those quiet evenings"},
+{type: 'card', title: "Remove ambiguities and convert to specifics"},
+{type: 'card', title: "Remove specifics and convert to ambiguities"},
+{type: 'card', title: "Repetition is a form of change"},
+{type: 'card', title: "Reverse"},
+{type: 'card', title: "Short circuit (example: a man eating peas with the idea that they will"},
+{type: 'card', title: "improve his virility shovels them straight into his lap)"},
+{type: 'card', title: "Shut the door and listen from outside"},
+{type: 'card', title: "Simple subtraction"},
+{type: 'card', title: "Spectrum analysis"},
+{type: 'card', title: "Take a break"},
+{type: 'card', title: "Take away the elements in order of apparent non-importance"},
+{type: 'card', title: "Tape your mouth (given by Ritva Saarikko)"},
+{type: 'card', title: "The inconsistency principle"},
+{type: 'card', title: "The tape is now the music"},
+{type: 'card', title: "Think of the radio"},
+{type: 'card', title: "Tidy up"},
+{type: 'card', title: "Trust in the you of now"},
+{type: 'card', title: "Turn it upside down"},
+{type: 'card', title: "Twist the spine"},
+{type: 'card', title: "Use an old idea"},
+{type: 'card', title: "Use an unacceptable color"},
+{type: 'card', title: "Use fewer notes"},
+{type: 'card', title: "Use filters"},
+{type: 'card', title: "Use 'unqualified' people"},
+{type: 'card', title: "Water"},
+{type: 'card', title: "What are you really thinking about just now? Incorporate"},
+{type: 'card', title: "What is the reality of the situation?"},
+{type: 'card', title: "What mistakes did you make last time?"},
+{type: 'card', title: "What would your closest friend do?"},
+{type: 'card', title: "What wouldn't you do?"},
+{type: 'card', title: "Work at a different speed"},
+{type: 'card', title: "You are an engineer"},
+{type: 'card', title: "You can only make one dot at a time"},
+{type: 'card', title: "You don't have to be ashamed of using your own ideas"},
+]
+
+        )
+        //add card tag
+        miro.board.tags.create({title: 'Card Tag', color: '#F24726', widgetIds: widgets})
+
+    }
+
     </script>
 </head>
 </html>
