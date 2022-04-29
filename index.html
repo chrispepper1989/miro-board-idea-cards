@@ -14,7 +14,7 @@
             onClick: () => {
               alert('Hi Chris!')
           
-            },//
+            },
             title: 'Generate Cards',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {
@@ -57,8 +57,7 @@
         let widgets = await miro.board.widgets.create([           
             {type: 'card', title: 'I am test card'},
         ])
-        miro.board.tags.create({title: 'Card Tag', color: '#F24726', widgetIds: widgets})
-
+        miro.board.tags.create({title: 'Card Tag', color: '#F24726', widgetIds: widgets});
         
     }
     async function generateCards()
