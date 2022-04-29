@@ -4,6 +4,8 @@
     <script src="https://miro.com/app/static/sdk.1.1.js"></script>
     <script>
     miro.onReady(() => {
+     
+
       miro.initialize({
         extensionPoints: {
           bottomBar: {
@@ -15,7 +17,23 @@
           }
         }
       })
+
+      createWidgets();
+
     })
+    function createWidgets()
+    {
+        // Create sticker and card with tag 'Red tag' 
+        let widgets = await miro.board.widgets.create([
+            {type: 'sticker', text: 'I am sticker'},
+            {type: 'card', title: 'I am card'},
+        ])
+        miro.board.tags.create({title: 'Red tag', color: '#F24726', widgetIds: widgets})
+
+        // Find all widgets with tag 'Red tag'
+        let tags = await miro.board.tags.get({title: 'Red tag'})
+        console.log(tags[0].widgetIds)
+    }
     </script>
 </head>
 </html>
