@@ -63,11 +63,11 @@
         let tags = await miro.board.tags.get({title: 'Quote Tag'})
         
         console.log(tags[0].widgetIds)
-        const array = tags[0].widgetIds;
+        let array = tags[0].widgetIds;
 
         if(array.length <= 1)
         {       
-           array = await miro.board.selection.get()
+           array = await miro.board.selection.get();
         }
         if(array.length <= 1)
         {            
