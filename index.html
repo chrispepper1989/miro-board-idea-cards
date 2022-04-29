@@ -22,7 +22,7 @@
           svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             librarySvgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {              
-              generateCards();
+               generateCards();
             }
         },
         bottomBar: { title: 'Get Random Card With Card Tag',
@@ -35,10 +35,10 @@
                     let generatePlease = confirm("You only have one card, do you want me to generate some random ones?"); 
                     if(generatePlease)
                     {
-                        generateCards();
+                        await generateCards();
                     }
                 }
-              getRandomCard();
+              await getRandomCard();
               miro.board.ui.openModal(document.body);
             }
           },
