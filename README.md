@@ -10,6 +10,10 @@ https://miro.com/oauth/authorize/?response_type=code&client_id=34587645243487862
 Documentation is here:
 https://developers.miro.com/docs/web-plugins-features
 
+# managing the app
+https://miro.com/app/settings/user-profile/apps
+
+
 # To do
 it should be bootstrapped locally following these instructions:
 https://developers.miro.com/docs/build-your-first-hello-world-app
