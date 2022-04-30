@@ -22,7 +22,7 @@
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {  
                 
-                askUser();
+                askUserAndGetCard();
             }
           },
         });     
@@ -33,15 +33,20 @@
 
     async function askUser()
     {
+
         const array = await getArrayOfCards();
         if(array.length <= 1)
         {
-            let generatePlease = confirm("You only have one card, do you want me to generate some random ones?"); 
+            let generatePlease = confirm("You only have less than one card, do you want me to generate some random ones?"); 
             if(generatePlease)
             {
                 await generateCards();
             }
         }
+    }
+    async function askUserAndGetCard()
+    {
+        await askUser();
         await getRandomCard();
         //miro.board.ui.openModal(document.body);
         
