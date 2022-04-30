@@ -31,8 +31,8 @@
 
     async function askUser()
     {
-        let tags = await miro.board.tags.get({title: 'Quote Tag'})
-        if(tags.length <= 1)
+        const array = await getArrayOfCards();
+        if(array.length <= 1)
         {
             let generatePlease = confirm("You only have one card, do you want me to generate some random ones?"); 
             if(generatePlease)
@@ -43,11 +43,10 @@
         await getRandomCard();
         //miro.board.ui.openModal(document.body);
         
-        miro.board.openLibrary('RealtimeBoard Stickers', document.body)
+        miro.board.openLibrary('RealtimeBoard Stickers', "index.html");
         
     }
-
-    async function getRandomCard()
+    async function getArrayOfCards()
     {
         // Find all widgets with tag 'Quote tag'
         let tags = await miro.board.tags.get({title: 'Quote Tag'})
@@ -67,6 +66,11 @@
         {            
             array = await miro.board.widgets.get({type: 'sticker'});
         }
+        return array;
+    }
+    async function getRandomCard()
+    {
+        const array = await getArrayOfCards();
 
         
         //put all in a deck
