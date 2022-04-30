@@ -53,8 +53,11 @@
         // Find all widgets with tag 'Quote tag'
         let tags = await miro.board.tags.get({title: 'Quote Tag'})       
         
-        let array = tags[0].widgetIds;
-
+        let array = [];
+        if(tags.length >= 1)
+        {
+            array = tags[0].widgetIds;
+        }
         if(array.length <= 1)
         {       
            array = await miro.board.selection.get();
