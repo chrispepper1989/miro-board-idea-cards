@@ -19,7 +19,7 @@
 
       miro.initialize({     
         extensionPoints: {       
-        bottomBar: { title: 'Get Random Card With Card Tag',
+        bottomBar: { title: 'Get One Quote Card',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {  
                 
@@ -117,7 +117,7 @@
         {
             
             console.log("no cards to shuffle");
-            askUser();
+            //askUser();
             return;
         }
         for(let i = 0; i < 100; ++i)
