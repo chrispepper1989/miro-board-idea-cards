@@ -13,6 +13,10 @@ https://developers.miro.com/docs/web-plugins-features
 # managing the app
 https://miro.com/app/settings/user-profile/apps
 
+# current working test is here:
+https://miro.com/app/board/uXjVO43K0e8=/
+
+
 
 # To do
 it should be bootstrapped locally following these instructions:

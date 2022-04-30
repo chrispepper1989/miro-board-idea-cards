@@ -13,7 +13,7 @@
             librarySvgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
           
             onClick: () => {              
-                miro.board.openLibrary('Testing', "index.html");
+                openModal();
             }
           }}});
 
@@ -31,6 +31,12 @@
         shuffleCards();
 
     })
+    async function openModal()
+    {
+        miro.board.openLibrary('Chris Test', "index.html");
+        changeModalText();
+    }
+    
 
     async function askUser()
     {
@@ -130,7 +136,7 @@
         console.log("cards shuffled");
 
     }
-    async function generateCards()
+    async function changeModalText()
     {
         const allCardText = [
 "Abandon normal instruments",
@@ -258,6 +264,14 @@
 "You can only make one dot at a time",
 "You don't have to be ashamed of using your own ideas",
 ];
+
+        //pick one        
+        const chosenText = allCardText[Math.floor(Math.random() * allCardText.length)];
+        document.getElementById("p1").innerHTML = chosenText;
+    }
+    async function generateCards()
+    {
+        
 
 
         // Create cards:
@@ -400,7 +414,9 @@
 <body>
 <button onclick="generateCards()">Generate Standard Set</button>
 <button onclick="getRandomCard()">Pick Random Card</button>
+<button onclick="shuffleCards()">Shuffle Cards</button>
 <div id="box" style="background: red; width: 50px; height: 50px;"></div>
+<p1>Place holder text</p1>
 <script>    
 async function createWidget(canvasX, canvasY) {
     const widget = (await miro.board.widgets.create({type: 'shape', x:canvasX || 0, y:canvasY || 0}))[0]
