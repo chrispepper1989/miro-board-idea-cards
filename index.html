@@ -5,7 +5,7 @@
     <script>
     miro.onReady(() => {
      
-        /* it does not seem to let you have more then one extension button
+        //it does not seem to let you have more then one extension button
         miro.initialize({
         extensionPoints: {         
             toolbar: { title: 'Open Modal Window',
@@ -15,9 +15,10 @@
             onClick: () => {              
                 askUser();
             }
-          }}});*/
+          }}});
 
-      miro.initialize({        
+      miro.initialize({     
+        extensionPoints: {       
         bottomBar: { title: 'Get Random Card With Card Tag',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {  
@@ -25,7 +26,7 @@
                 askUserAndGetCard();
             }
           },
-        });     
+        }});     
       
         shuffleCards();
 
@@ -112,9 +113,11 @@
     {
              
         const array = await getArrayOfCards();
-        if(array.length <= 0)
+        if(array.length <= 1)
         {
+            
             console.log("no cards to shuffle");
+            askUser();
             return;
         }
         for(let i = 0; i < 100; ++i)
