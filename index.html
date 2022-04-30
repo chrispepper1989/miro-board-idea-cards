@@ -77,6 +77,11 @@
     {
         const array = await getArrayOfCards();
 
+        if(array.length <= 0)
+        {
+            console.log("no cards to get");
+            return;
+        }
         
         //put all in a deck
         miro.board.widgets.sendBackward(array);
@@ -102,6 +107,11 @@
     {
              
         const array = await getArrayOfCards();
+        if(array.length <= 0)
+        {
+            console.log("no cards to shuffle");
+            return;
+        }
         for(let i = 0; i < 100; ++i)
         {
             //pick one        
