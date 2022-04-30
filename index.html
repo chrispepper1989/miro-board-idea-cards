@@ -125,7 +125,7 @@
             //pick one        
             const chosenId = array[Math.floor(Math.random() * array.length)];
             //bring forward
-            miro.board.widgets.bringForward(chosenId) 
+            miro.board.widgets.bringForward([chosenId]); 
         }  
         console.log("cards shuffled");
 
