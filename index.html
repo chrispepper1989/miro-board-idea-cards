@@ -27,6 +27,7 @@
           },
         });     
       
+        shuffleCards();
 
     })
 
@@ -93,6 +94,19 @@
         ])
         miro.board.tags.create({title: 'Quote Tag', color: '#F24726', widgetIds: widgets});
         
+    }
+    async function shuffleCards()
+    {
+             
+        const array = await getArrayOfCards();
+        for(let i = 0; i < 100; ++i)
+        {
+            //pick one        
+            const chosenId = array[Math.floor(Math.random() * array.length)];
+            //bring forward
+            miro.board.widgets.bringForward(chosenId) 
+        }  
+
     }
     async function generateCards()
     {
