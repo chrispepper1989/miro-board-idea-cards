@@ -8,7 +8,7 @@
         //it does not seem to let you have more then one extension button
         miro.initialize({
         extensionPoints: {         
-            toolbar: { title: 'Open Modal Window',
+            toolbar: { title: 'Open Chris Modal Window',
             toolbarSvgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             librarySvgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
           
@@ -267,7 +267,7 @@
 
         //pick one        
         const chosenText = allCardText[Math.floor(Math.random() * allCardText.length)];
-        document.getElementById("p1").innerHTML = chosenText;
+        document.getElementById("qtext").innerHTML = chosenText;
     }
     async function generateCards()
     {
@@ -415,10 +415,20 @@
 <button onclick="generateCards()">Generate Standard Set</button>
 <button onclick="getRandomCard()">Pick Random Card</button>
 <button onclick="shuffleCards()">Shuffle Cards</button>
-<div id="box" style="background: red; width: 50px; height: 50px;"></div>
-<p1>Place holder text</p1>
+<button onclick="changeModalText()">Change Quote Text here:</button>
+<h2 id="qtext">Place holder text</h2>
+<p> This is a simple example showing different ways of achieving 'Random Quotes' The simplest is text ^ directly here that changes when the modal is opened.</p>
+<p> Another approach is shown with the buttons which will pick a random card already on the miro board, bring it to the front and zoom to it</p>
+<p> First it will look for all cards with the "quote" tag </p>
+<p> If it can not find any, it will look for any selected cards</p>
+<p> If it can not find any, it will look for any  cards</p>
+<p> Finally it will look for any stickers</p>
+<p> if nothing is found it will as the user if they want to generate some</p>
+<p> I quite like the card quote tag approach as it encourages random choices from user input, but the text above is simpler :) </p> 
 <script>    
-
+miro.onReady(() => {
+    changeModalText();
+    })
 
 </script>
 </body>
