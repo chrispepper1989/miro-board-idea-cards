@@ -16,7 +16,18 @@ https://miro.com/app/settings/user-profile/apps
 # current working test is here:
 https://miro.com/app/board/uXjVO43K0e8=/
 
+# Approach(es)
+This is a simple example showing different ways of achieving 'Random Quotes' The simplest is text ^ directly here that changes when the modal is opened.
 
+Another approach is shown with the buttons which will pick a random card already on the miro board, bring it to the front and zoom to it
+
+1. First it will look for all cards with the "quote" tag 
+1. If it can not find any, it will look for any selected cards
+1.  If it can not find any, it will look for any  cards
+1.  Finally it will look for any stickers
+1.  if nothing is found it will as the user if they want to generate some
+
+I quite like the card quote tag approach as it encourages random choices from user input, but the text above is simpler :)  
 
 # To do
 it should be bootstrapped locally following these instructions:
