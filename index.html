@@ -374,11 +374,12 @@ const obliqueSet = [
                 border: 2px solid #c0312c;
                 padding: 20px;
                 width: 150px;
-                font-size:10px;
+                
                 text-align: center;
                 }
                 .tall-card
                 {
+                    font-size:10px;
                     height: 300px; 
                 }
                
@@ -420,7 +421,11 @@ const obliqueSet = [
                         font-family: 'Bowlby One SC', cursive;
                     }
                     h3, p{
-                        color: whitesmoke;
+                        color: whitesmoke;                    
+                    }
+                    p{
+                        
+                        padding: 8px;
                     }
                     div.scroll {
                 margin:4px, 4px;
@@ -456,6 +461,8 @@ const obliqueSet = [
 </svg> 
 <h2 id="qtext">Place holder text</h2>
 </div>
+<br>
+<button onclick="toggleReadMe()">Toggle ReadMe</button>
 <div id="readme" class="scroll">
 <h3 >Read Me</h3>
 <p> This is a simple example showing different ways of achieving 'Random Quotes' The simplest is text ^ directly here that changes when the modal is opened.</p>
@@ -467,7 +474,7 @@ const obliqueSet = [
 <p> e.) if nothing is found it will ask the user if they want to generate some </p>
 <p> I quite like the card quote tag approach as it encourages random choices from user input, but the text above is simpler :) </p> 
 </div>
-<button onclick="toggleReadMe()">Toggle ReadMe</button>
+
 <script> 
 
 let hidden = false;
