@@ -235,7 +235,7 @@ const obliqueSet = [
 
       miro.initialize({     
         extensionPoints: {       
-        bottomBar: { title: 'Get One Quote Card',
+        bottomBar: { title: 'Get One Inspire Card',
             svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
             onClick: () => {  
                 
@@ -274,8 +274,8 @@ const obliqueSet = [
     }
     async function getArrayOfCards()
     {
-        // Find all widgets with tag 'Quote tag'
-        let tags = await miro.board.tags.get({title: 'Quote Tag'})       
+        // Find all widgets with tag 'Inspire tag'
+        let tags = await miro.board.tags.get({title: 'Inspire Me'})       
         
         let array = [];
         if(tags.length >= 1)
@@ -324,7 +324,7 @@ const obliqueSet = [
         let widgets = await miro.board.widgets.create([           
             {type: 'card', title: 'I am test card'},
         ])
-        miro.board.tags.create({title: 'Quote Tag', color: '#F24726', widgetIds: widgets});
+        miro.board.tags.create({title: 'Inspire Me', color: '#F24726', widgetIds: widgets});
         
     }
     async function shuffleCards()
@@ -362,7 +362,7 @@ const obliqueSet = [
         let cardArray = array.map(ele => {return {"title":ele, "type":'card'}});
         let widgets = await miro.board.widgets.create(cardArray);
         //add card tag
-        miro.board.tags.create({title: 'Quote Tag', color: '#00FF00', widgetIds: widgets})
+        miro.board.tags.create({title: 'Inspire Me', color: '#00FF00', widgetIds: widgets})
 
     }
 
@@ -465,14 +465,14 @@ const obliqueSet = [
 <button onclick="toggleReadMe()">Toggle ReadMe</button>
 <div id="readme" class="scroll">
 <h3 >Read Me</h3>
-<p> This is a simple example showing different ways of achieving 'Random Quotes' The simplest is text ^ directly here that changes when the modal is opened.</p>
+<p> This is a simple example showing different ways of achieving 'Random Inspires' The simplest is text ^ directly here that changes when the modal is opened.</p>
 <p> Another approach is shown with the buttons which will pick a random card already on the miro board, bring it to the front and zoom to it</p>
-<p> a.) First it will look for all cards with the "quote" tag </p>
+<p> a.) First it will look for all cards with the "Inspire Me" tag </p>
 <p> b.) If it can not find any, it will look for any selected cards</p>
 <p> c.) If it can not find any, it will look for any  cards</p>
 <p> d.) Finally it will look for any stickers</p>
 <p> e.) if nothing is found it will ask the user if they want to generate some </p>
-<p> I quite like the card quote tag approach as it encourages random choices from user input, but the text above is simpler :) </p> 
+<p> I quite like the card Inspire tag approach as it encourages random choices from user input, but the text above is simpler :) </p> 
 </div>
 
 <script> 
