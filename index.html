@@ -247,11 +247,11 @@ const obliqueSet = [
         init();
     })
 
-    async function createWidgetFromCard(canvasX, canvasY) {
+    async function createWidgetFromCard(canvasX, canvasY, quote) {
         
         //todo style using: https://developers.miro.com/docs/interface-ishapewidget
-        const quote = document.getElementById("qtext").innerHTML;
-        const widget = (await miro.board.widgets.create({type: 'shape',  
+        
+        return miro.board.widgets.create({type: 'shape',  
                                                          text:quote, 
                                                          borderColor: "#c0312c",
                                                         shapeType: 7,
@@ -263,38 +263,40 @@ const obliqueSet = [
                                                             backgroundColor: '#632801',
                                                             borderColor: '#c0312c',
                                                             type:7,
-                                                            },}))[0]
+                                                            },});
         
-        miro.board.viewport.zoomToObject(widget)
-        console.log(quote);
-        console.log(widget);
-        console.log("coords" + canvasX + ":" + canvasY);
+        
     }
 
-    async function init() {
+    function init() {
 
         changeModalText(mediaComSet);
 
         //draggable stuff
         
-        const options = {
+        const dragOptions = {
             draggableItemSelector: '#card',
             onClick: async (targetElement) => {
-                createWidgetFromCard()
+                const quote = document.getElementById("qtext").innerHTML;
+                const widget = (await createWidgetFromCard(0, 0, quote))[0]
+                miro.board.viewport.zoomToObject(widget)
             },      
-            getDraggableItemPreview: (targetElement) => { //drag-started
+            getDraggableItemPreview: (targetElement) => { 
+                //drag-started
                 const currentShapeColor = "632801";//targetElement.getAttribute('data-color');
                 const currentShapeText = "?: "+document.getElementById("qtext").innerHTML;//targetElement.innerHTML;
                 return {
                     url: `data:image/svg+xml,%3Csvg width='140' height='140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect stroke='null' x='0' y='0' fill='%23${currentShapeColor}' height='140' width='140'/%3E%3C/g%3E%3C/svg%3E`,
-                }            
+                };           
             },
             onDrop: (canvasX, canvasY) => {
-                createWidgetFromCard(canvasX, canvasY)
+                const quote = document.getElementById("qtext").innerHTML;
+                miro.board.viewport.zoomToObject(widget);              
+                createWidgetFromCard(canvasX, canvasY, quote);
             }
         }
 
-        miro.board.ui.initDraggableItemsContainer(document.body, options)
+        miro.board.ui.initDraggableItemsContainer(document.body, dragOptions)
     
     }
 
