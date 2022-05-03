@@ -352,10 +352,19 @@ const obliqueSet = [
         console.log(array)
         return array;
     }
+    async function getRandomSelection()
+    {
+        array = await miro.board.selection.get();
+        await getFromArray(array);
+    }
     async function getRandomCard()
     {
         const array = await getArrayOfCards();
-
+        await getFromArray(array);
+        
+    }
+    async function getFromArray(array)
+    {
         if(array.length <= 0)
         {
             console.log("no cards to get");
@@ -520,6 +529,7 @@ const obliqueSet = [
 
 <br>
 <button onclick="getRandomCard()" class="button-style">Pick Random Card on Board</button>
+<button onclick="getRandomSelection()" class="button-style">Pick Random From Selection</button>
 <button onclick="shuffleCards()" class="button-style">Shuffle Cards on Board</button>
 <br>
 <br>
