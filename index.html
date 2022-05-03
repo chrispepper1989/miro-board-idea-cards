@@ -382,6 +382,10 @@ const obliqueSet = [
                     font-size:10px;
                     height: 300px; 
                 }
+                .taller-box
+                {
+                    height: 500px; 
+                }
                
 
                 .button-style {
@@ -430,12 +434,18 @@ const obliqueSet = [
                     div.scroll {
                 margin:4px, 4px;
                 padding:4px;
-                background-color: black;
-                width: 500px;
+               
                 height: 200px;
                 overflow-x: hidden;
                 overflow-y: auto;
                 text-align:justify;
+                width: 500px;
+            }
+            .readme
+            {
+                
+                height: 200px;
+                background-color: black;
             }
             .hide {
                 display: none !important;
@@ -444,6 +454,7 @@ const obliqueSet = [
     </style>
 </head>
 <body>
+    <div id="main-box" class="scroll">
 <button onclick="generateCards(obliqueSet)" class="button-style bad-button">Generate Oblique Set On Board</button>
 <button onclick="generateCards(mediaComSet)" class="button-style bad-button">Generate MediaCom Set On Board</button>
 
@@ -457,13 +468,16 @@ const obliqueSet = [
 <div id = "card" class="card-media">
      <svg height="30" width="30">
          <circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>
-
+        
 </svg> 
 <h2 id="qtext">Place holder text</h2>
 </div>
 <br>
 <button onclick="toggleReadMe()">Toggle ReadMe</button>
-<div id="readme" class="scroll">
+</div>
+<br>
+<button onclick="toggleReadMe()">Toggle ReadMe</button>
+<div id="readme" class="scroll readme">
 <h3 >Read Me</h3>
 <p> This is a simple example showing different ways of achieving 'Random Inspires' The simplest is text ^ directly here that changes when the modal is opened.</p>
 <p> Another approach is shown with the buttons which will pick a random card already on the miro board, bring it to the front and zoom to it</p>
@@ -485,11 +499,13 @@ function toggleReadMe()
     {
         document.getElementById("readme").classList.add("hide");
         document.getElementById("card").classList.add("tall-card");
+        document.getElementById("main-box").classList.add("taller-box");
     }
     else
     {
         document.getElementById("readme").classList.remove("hide");
         document.getElementById("card").classList.remove("tall-card");
+        document.getElementById("main-box").classList.remove("taller-box");
     }
 
 }
