@@ -290,6 +290,7 @@ const obliqueSet = [
                 };           
             },
             onDrop: (canvasX, canvasY) => {
+                console.log("Drop");
                 const quote = document.getElementById("qtext").innerHTML;
                 miro.board.viewport.zoomToObject(widget);              
                 createWidgetFromCard(canvasX, canvasY, quote);
