@@ -243,14 +243,13 @@ const obliqueSet = [
             }
           },
         }});     
-      
-        shuffleCards();
-
+             
+        changeModalText(mediaComSet);
     })
     async function openModal()
     {
         miro.board.openLibrary('Chris Test', "index.html");
-        changeModalText();
+        changeModalText(mediaComSet);
     }
     
 
@@ -310,13 +309,13 @@ const obliqueSet = [
         
         //put all in a deck
         miro.board.widgets.sendBackward(array);
-        miro.board.widgets.transformDelta(   array, -10,-10);  //todo this is fun but lets not have it in final version
+       // miro.board.widgets.transformDelta(   array, -10,-10);  //todo this is fun but lets not have it in final version
         
         //pick one        
         const chosenId = array[Math.floor(Math.random() * array.length)];
         
         miro.board.widgets.bringForward(chosenId)   
-        miro.board.widgets.transformDelta(   chosenId, 10,10);  //todo this is fun but lets not have it in final version
+       // miro.board.widgets.transformDelta(   chosenId, 10,10);  //todo this is fun but lets not have it in final version
         await miro.board.viewport.zoomToObject(chosenId)
     }
     async function createExampleCard()
@@ -374,10 +373,15 @@ const obliqueSet = [
                 border-radius: 25px;
                 border: 2px solid #c0312c;
                 padding: 20px;
-                width: 200px;
-                height: 300px;
+                width: 150px;
+                
                 text-align: center;
                 }
+                .tall-card
+                {
+                    height: 200px; 
+                }
+               
 
                 .button-style {
                     align-items: center;
@@ -391,10 +395,10 @@ const obliqueSet = [
                     cursor: pointer;
                     display: inline-flex;
                     font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
-                    font-size: 16px;
+                    font-size:12px;
                     font-weight: 600;
                     justify-content: center;
-                    line-height: 1.25;
+                   
                     margin: 0;
                     min-height: 3rem;
                     padding: calc(.875rem - 1px) calc(1.5rem - 1px);
@@ -415,6 +419,19 @@ const obliqueSet = [
                         font-size: 1.5vw;
                         font-family: 'Bowlby One SC', cursive;
                     }
+                    div.scroll {
+                margin:4px, 4px;
+                padding:4px;
+                background-color: black;
+                width: 500px;
+                height: 200px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                text-align:justify;
+            }
+            .hide {
+                display: none !important;
+            }
                 
     </style>
 </head>
@@ -429,14 +446,15 @@ const obliqueSet = [
 <br>
 <button onclick="changeModalText(obliqueSet)" class="button-style">Change this card text here (Oblique):</button>
 <button onclick="changeModalText(mediaComSet)" class="button-style">Change this card text here (MediaCom):</button>
-<div class="card-media">
+<div id = "card" class="card-media">
      <svg height="30" width="30">
          <circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>
 
 </svg> 
 <h2 id="qtext">Place holder text</h2>
 </div>
-<h3>Read Me</h3>
+<div id="readme" class="scroll">
+<h3 >Read Me</h3>
 <p> This is a simple example showing different ways of achieving 'Random Quotes' The simplest is text ^ directly here that changes when the modal is opened.</p>
 <p> Another approach is shown with the buttons which will pick a random card already on the miro board, bring it to the front and zoom to it</p>
 <p> a.) First it will look for all cards with the "quote" tag </p>
@@ -445,10 +463,28 @@ const obliqueSet = [
 <p> d.) Finally it will look for any stickers</p>
 <p> e.) if nothing is found it will ask the user if they want to generate some </p>
 <p> I quite like the card quote tag approach as it encourages random choices from user input, but the text above is simpler :) </p> 
-<script>    
-miro.onReady(() => {
-    changeModalText();
-    })
+</div>
+<button onclick="toggleReadMe()">Toggle ReadMe</button>
+<script> 
+
+let hidden = false;
+function toggleReadMe()
+{
+    hidden = !hidden;
+    if(hidden)
+    {
+        document.getElementById("readme").classList.add("hide");
+        document.getElementById("card").classList.add("tall-card");
+    }
+    else
+    {
+        document.getElementById("readme").classList.remove("hide");
+        document.getElementById("card").classList.remove("tall-card");
+    }
+
+}
+
+
 
 </script>
 </body>
