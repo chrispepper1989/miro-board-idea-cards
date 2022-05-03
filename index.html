@@ -244,8 +244,43 @@ const obliqueSet = [
           },
         }});     
              
-        changeModalText(mediaComSet);
+        init();
     })
+
+    async function createWidgetFromCard(canvasX, canvasY) {
+        
+        //todo style using: https://developers.miro.com/docs/interface-ishapewidget
+        const quote = document.getElementById("qtext").innerHTML;
+        const widget = (await miro.board.widgets.create({type: 'shape',  text:quote, shapeType:"ROUNDER", x:canvasX || 0, y:canvasY || 0}))[0]
+        
+        miro.board.viewport.zoomToObject(widget)
+        console.log(quote);
+        console.log(widget);
+    }
+
+    async function init() {
+
+        changeModalText(mediaComSet);
+
+        //draggable stuff
+        
+        const options = {
+        draggableItemSelector: '#card',
+        onClick: async (targetElement) => {
+            createWidgetFromCard()
+        },
+        getDraggableItemPreview: (targetElement) => { //drag-started
+            return {url: HOTSPOT_PREVIEW}
+        },
+        onDrop: (canvasX, canvasY) => {
+            createWidgetFromCard(canvasX, canvasY)
+        }
+        }
+
+        miro.board.ui.initDraggableItemsContainer("index.html", options)
+    
+    }
+
     async function openModal()
     {
         miro.board.openLibrary('Chris Test', "index.html");
@@ -356,15 +391,16 @@ const obliqueSet = [
     async function generateCards(array)
     {
         
-        //todo map the text array    
-
-        // Create cards:
+         // Create cards:
         let cardArray = array.map(ele => {return {"title":ele, "type":'card'}});
         let widgets = await miro.board.widgets.create(cardArray);
         //add card tag
         miro.board.tags.create({title: 'Inspire Me', color: '#00FF00', widgetIds: widgets})
 
     }
+ 
+    
+    
 
     </script>
     </head>
@@ -465,7 +501,7 @@ const obliqueSet = [
 <br>
 <button onclick="changeModalText(obliqueSet)" class="button-style">Change this card text here (Oblique):</button>
 <button onclick="changeModalText(mediaComSet)" class="button-style">Change this card text here (MediaCom):</button>
-<div id = "card" class="card-media">
+<div id = "card" class="card-media miro-draggable">
      <svg height="30" width="30">
          <circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>
         
