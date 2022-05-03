@@ -33,5 +33,7 @@ I quite like the card quote tag approach as it encourages random choices from us
 it should be bootstrapped locally following these instructions:
 https://developers.miro.com/docs/build-your-first-hello-world-app
 
+Create better version hosted in Code repo
+
 # Watch out / trouble shooting
 Every now and then, the plugin seems to stop having "read/write" permisions. When this happens you have to re-install the plugin
