@@ -251,11 +251,17 @@ const obliqueSet = [
         
         //todo style using: https://developers.miro.com/docs/interface-ishapewidget
         const quote = document.getElementById("qtext").innerHTML;
-        const widget = (await miro.board.widgets.create({type: 'shape',  text:quote, shapeType:"ROUNDER", x:canvasX || 0, y:canvasY || 0}))[0]
+        const widget = (await miro.board.widgets.create({type: 'shape',  
+                                                         text:quote, 
+                                                         borderColor: "#c0312c",
+                                                        shapeType: 7,
+                                                         x:canvasX || 0,
+                                                          y:canvasY || 0}))[0]
         
         miro.board.viewport.zoomToObject(widget)
         console.log(quote);
         console.log(widget);
+        console.log("coords" + canvasX + ":" + canvasY);
     }
 
     async function init() {
@@ -412,7 +418,7 @@ const obliqueSet = [
                 width: 150px;
                 height: 200px;
                 text-align: center;
-                background: black;
+                background: #632801;
                 }
                 .tall-card
                 {
